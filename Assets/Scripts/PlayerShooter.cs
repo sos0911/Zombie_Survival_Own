@@ -29,6 +29,17 @@ public class PlayerShooter : MonoBehaviour {
 
     private void Update() {
         // 입력을 감지하고 총 발사하거나 재장전
+        if (playerInput.fire)
+        {
+            gun.Fire();
+        }
+        else if (playerInput.reload)
+        {
+            if (gun.Reload())
+                playerAnimator.SetTrigger("Reload");
+        }
+
+        UpdateUI();
     }
 
     // 탄약 UI 갱신
@@ -41,7 +52,24 @@ public class PlayerShooter : MonoBehaviour {
     }
 
     // 애니메이터의 IK 갱신
+    // animator component가 ik정보를 변경할 때마다 호출되는 메소드이다.
+    // animator의 upper body layer에서 ik pass를 걸어뒀으니 거기서 나올듯
     private void OnAnimatorIK(int layerIndex) {
-        
+        gunPivot.position = playerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
+
+        // 왼쪽손의 위치, 회전 가중치를 먼저 맞추고 위치,회전을 총 왼쪽 손잡이에 맞춰줌
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
+        playerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
+
+        // 가중치 1.0을 맞춘 다음 왼쪽손 위치,회전을 총 왼쪽손잡이 위치에 위치시킴
+        playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandMount.position);
+        playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandMount.rotation);
+
+        // 오른손 무게, 위치,회전을 총 오른쪽 손잡이에 맞춰줌
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f);
+        playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1.0f);
+
+        playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, rightHandMount.position);
+        playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandMount.rotation);
     }
 }
