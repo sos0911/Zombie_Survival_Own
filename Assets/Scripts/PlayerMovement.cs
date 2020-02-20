@@ -33,11 +33,20 @@ public class PlayerMovement : MonoBehaviour {
 
     // 입력값에 따라 캐릭터를 앞뒤로 움직임
     private void Move() {
-
+        // -1~1 * 방향정규벡터 * speed * 주기
+        // 한 프레임동안 이동할 거리와 방향
+        Vector3 moveDistance = playerInput.move * transform.forward * moveSpeed * Time.deltaTime;
+        
+        // 인자는 전역 위치 벡터
+        playerRigidbody.MovePosition(playerRigidbody.position + moveDistance);
     }
 
     // 입력값에 따라 캐릭터를 좌우로 회전
     private void Rotate() {
+        float turn = playerInput.rotate * rotateSpeed * Time.deltaTime;
 
+        // 현재 회전상태에서 turn만큼 y축기반으로 더돌음
+        // transform.rotation을 변경해도 되지만 물리처리를 무시하고 회전가능하므로 사용x
+        playerRigidbody.rotation *= Quaternion.Euler(0, turn, 0f);
     }
 }
