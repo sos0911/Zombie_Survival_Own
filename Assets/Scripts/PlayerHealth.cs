@@ -47,8 +47,8 @@ public class PlayerHealth : LivingEntity {
         // LivingEntity의 RestoreHealth() 실행 (체력 증가)
         base.RestoreHealth(newHealth);
 
+        // 슬라이더에 체력수치 반영
         healthSlider.value = health;
-
     }
 
     // 데미지 처리
@@ -87,7 +87,7 @@ public class PlayerHealth : LivingEntity {
             IItem item = other.GetComponent<IItem>();
             if (item != null)
             {
-                // item 효과를 player에게 적용
+                // item 효과를 player에게 적용 >> 함수 인자가 player
                 item.Use(gameObject);
                 playerAudioPlayer.PlayOneShot(itemPickupClip);
             }

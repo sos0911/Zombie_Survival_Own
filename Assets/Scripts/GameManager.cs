@@ -3,6 +3,7 @@
 // 점수와 게임 오버 여부를 관리하는 게임 매니저
 public class GameManager : MonoBehaviour {
     // 싱글톤 접근용 프로퍼티
+    // 결국 static 함수이며, 여기서 수정 & touch, return되는 모든 변수들은 static이어야 함.
     public static GameManager instance
     {
         get
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         // 플레이어 캐릭터의 사망 이벤트 발생시 게임 오버
+        // endgame()을 이벤트 리스트에 추가 >> playerhealth에서 die() 호출 시 endgame() 호출됨. >> UI 상태 바뀜  
         FindObjectOfType<PlayerHealth>().onDeath += EndGame;
     }
 
