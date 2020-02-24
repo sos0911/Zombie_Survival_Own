@@ -63,7 +63,7 @@ public class ItemSpawner : MonoBehaviour {
         NavMeshHit hit;
 
         // maxDistance 반경 안에서, randomPos에 가장 가까운 내비메시 위의 한 점을 찾음
-        NavMesh.SamplePosition(randomPos, out hit, distance, NavMesh.AllAreas);
+        NavMesh.SamplePosition(randomPos, out hit, distance, 1);
 
         // 찾은 점 반환
         return hit.position;
