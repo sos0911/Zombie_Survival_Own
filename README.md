@@ -1,7 +1,28 @@
-# Zombie_Survival_Own
-3D Zombie sirvival game.
------------------------------
-### 좀비 서바이벌 3D 게임 (클론코딩)
-### zombie survival 3D game (clone coding)
-* devloping game studing a book on unity engine programming.
-* development undergo
+# How to play
+
+* R key : reload
+* w,s : move front / back
+* a,d : rotate left, right
+* mouse left click : shoot bullets using gun(micro_uzi)
+
+## items
+
+* randomly generated around players
+* HP item, coin item, ammo item
+
+### hp item
+
+* increase HP
+
+### coin item
+
+* increase score
+
+### ammo item
+
+* increase number of ammo
+
+# single-player
+
+* single player game.
+* the number of spawning zombies, speed and health will be increased whenever level is changed.
